@@ -16,7 +16,39 @@
             <h4>Ngrok Server Paste Example</h4>
             <blockquote>This is an example of a server that forwards any local running port over a ngrok tcp tunnel. Then uploads the randomly generated ngrok tunnel url to <a href="https://www.pastesite.org/about">PasteSite.org<a> using the authour specified during setup. (this is what the client will search to find the tunnel url)</p></blockquote>
             <details><summary>Server.py</summary><br>
-            <pre><code class="language-python">import os, fastpaste, pyngrok.ngrok as ngrok, time<br>authKey=input("What is Your Ngrok Auth Token?: ")<br>ServerPort=input("What is the port Of The Local Running Server?(Ex. WebServer is 80): ")<br>Username=input("What is the User you Would Like To Make Pastes With?: ")<br>fastpaste.Data.UserName=Username<br>fastpaste.Data.DefSilent=True<br>if(os.path.exists(os.getcwd()+"/keys.txt")!=True):<br>    ky=fastpaste.AesObj.gen()<br>    input(f"Generating Keys.txt For the Encryption. The Client MUST Have The Same Keys.txt For Encryption\n{ky}\nPress Enter To Continue...")<br>    fastpaste.Data.KeyData=ky<br>else:<br>    fastpaste.Data.KeyData=fastpaste.AesObj.keyfile2Tup(os.getcwd()+"/keys.txt")<br>server=ngrok.connect(f"127.0.0.1:{ServerPort}", "http" if(input("Would You Like To Use Tcp?[y/n]: ")!="y") else "tcp", pyngrok_config=ngrok.conf.PyngrokConfig(auth_token=authKey))<br>print(f"Started Server At {server.public_url}")<br>print("Pasteing Encrypted Server Url to pastesite.org")<br>if(fastpaste.PasteApi.Paste("", str(server.public_url))):<br>    print("Pasted Successfully")<br>s=time.time()<br>while(True):<br>    try:<br>        os.system("cls" if(os.sep == "\\") else "clear")<br>        print(f"Runtime: {fastpaste.Data.time_convert(time.time()-s)}")<br>        print("Running: True\n")<br>    except KeyboardInterrupt:<br>        pass<br>        try:<br>            ngrok.disconnect(server.public_url)<br>        except Exception:<br>            pass<br>        os.system("cls" if(os.sep == "\\") else "clear")<br>        print(f"Final Runtime: {fastpaste.Data.time_convert(time.time()-s)}")<br>        print("Running: False\n")<br>        break</code></pre></details>
+            <pre><code class="language-python">import os, fastpaste, pyngrok.ngrok as ngrok, time
+authKey=input("What is Your Ngrok Auth Token?: ")
+ServerPort=input("What is the port Of The Local Running Server?(Ex. WebServer is 80): ")
+Username=input("What is the User you Would Like To Make Pastes With?: ")
+fastpaste.Data.UserName=Username
+fastpaste.Data.DefSilent=True
+if(os.path.exists(os.getcwd()+"/keys.txt")!=True):
+    ky=fastpaste.AesObj.gen()
+    input(f"Generating Keys.txt For the Encryption. The Client MUST Have The Same Keys.txt For Encryption\n{ky}\nPress Enter To Continue...")
+    fastpaste.Data.KeyData=ky
+else:
+    fastpaste.Data.KeyData=fastpaste.AesObj.keyfile2Tup(os.getcwd()+"/keys.txt")
+server=ngrok.connect(f"127.0.0.1:{ServerPort}", "http" if(input("Would You Like To Use Tcp?[y/n]: ")!="y") else "tcp", pyngrok_config=ngrok.conf.PyngrokConfig(auth_token=authKey))
+print(f"Started Server At {server.public_url}")
+print("Pasteing Encrypted Server Url to pastesite.org")
+if(fastpaste.PasteApi.Paste("", str(server.public_url))):
+    print("Pasted Successfully")
+s=time.time()
+while(True):
+    try:
+        os.system("cls" if(os.sep == "\\") else "clear")
+        print(f"Runtime: {fastpaste.Data.time_convert(time.time()-s)}")
+        print("Running: True\n")
+    except KeyboardInterrupt:
+        pass
+        try:
+            ngrok.disconnect(server.public_url)
+        except Exception:
+            pass
+        os.system("cls" if(os.sep == "\\") else "clear")
+        print(f"Final Runtime: {fastpaste.Data.time_convert(time.time()-s)}")
+        print("Running: False\n")
+        break</code></pre></details>
             <h4>Ngrok Client Paste Example</h4>
             <blockquote>This is an example of a client that will automatically search for pastes from the specified user  on <a href="https://www.pastesite.org/about">PasteSite.org<a> Then Will Decrypt the Ngrok Url Using The SAME keys.txt As the Server.py</p></blockquote>
             <details><summary>Client.py</summary><br>
