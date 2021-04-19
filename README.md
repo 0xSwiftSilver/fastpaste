@@ -11,9 +11,10 @@ pip3 install fastpaste==0.0.3</pre></code>
 <hr>
 <ul>
 <li>
+    <h4>
     <details>
-        <summary><h4>QuickStart</h4></summary>
-        <h5>
+        <summary>QuickStart</summary>
+        </h4><h5>
         <blockquote>
             <h4>Ngrok Server Paste Example</h4>
             <blockquote>This is an example of a server that forwards any local running port over a ngrok tcp tunnel. Then uploads the randomly generated ngrok tunnel url to <a href="https://www.pastesite.org/about">PasteSite.org<a> using the authour specified during setup. (this is what the client will search to find the tunnel url)</p></blockquote>
