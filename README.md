@@ -4,7 +4,7 @@
 <pre>
 <code class="language-python">pip install fastpaste
   or
-pip3 install fastpaste==0.0.3</pre></code>
+pip3 install fastpaste==0.1.3</pre></code>
 
 
 <h2>Documentation</h2>
