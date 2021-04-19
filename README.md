@@ -7,13 +7,12 @@
 pip3 install fastpaste==0.0.3</pre></code>
 
 
-<h2>Documentation</h3>
+<h2>Documentation</h2>
 <hr>
 <ul>
 <li>
-    <h4>
     <details>
-        <summary>QuickStart</summary>
+        <summary><h4>QuickStart</h4></summary>
         <h5>
         <blockquote>
             <h4>Ngrok Server Paste Example</h4>
